@@ -20,6 +20,18 @@ model User {
 
     Credentials  Credentials?
     AuthProvider AuthProvider?
+    Admin        Admin?
+    Manager      Manager?
+}
+
+model Admin {
+    uid  String @id
+    user User   @relation(fields: [uid], references: [uid])
+}
+
+model Manager {
+    uid  String @id
+    user User   @relation(fields: [uid], references: [uid])
 }
 
 model Credentials {

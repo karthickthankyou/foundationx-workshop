@@ -4,6 +4,8 @@ import { User } from './entity/user.entity'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
 import { CreateUserInput } from './dtos/create-user.input'
 import { UpdateUserInput } from './dtos/update-user.input'
+import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
+import { GetUserType } from '@foundation/util/types'
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -14,8 +16,10 @@ export class UsersResolver {
     return this.usersService.create(args)
   }
 
+  @AllowAuthenticated('admin')
   @Query(() => [User], { name: 'users' })
-  findAll(@Args() args: FindManyUserArgs) {
+  findAll(@Args() args: FindManyUserArgs, @GetUser() user: GetUserType) {
+    console.log('user ', user)
     return this.usersService.findAll(args)
   }
 
