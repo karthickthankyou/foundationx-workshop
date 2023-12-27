@@ -15,6 +15,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type AuthOutput {
+  user: User!
+  token: String!
+}
+
 type Query {
   users(distinct: [UserScalarFieldEnum!], where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): [User!]!
   user(where: UserWhereUniqueInput!): User!
@@ -86,19 +91,37 @@ input UserWhereUniqueInput {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  registerWithProvider(registerWithProviderInput: RegisterWithProviderInput!): AuthOutput!
+  registerWithCredentials(registerWithCredentialsInput: RegisterWithCredentialsInput!): AuthOutput!
+  login(loginInput: LoginInput!): AuthOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User!
 }
 
-input CreateUserInput {
+input RegisterWithProviderInput {
   name: String
   image: String
   uid: String!
+  type: AuthProviderType!
+}
+
+enum AuthProviderType {
+  GOOGLE
+  CREDENTIALS
+}
+
+input RegisterWithCredentialsInput {
+  name: String
+  image: String
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 input UpdateUserInput {
-  name: String
-  image: String
   uid: String!
 }

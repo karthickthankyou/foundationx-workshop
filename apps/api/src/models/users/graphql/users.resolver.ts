@@ -1,8 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import { UsersService } from './users.service'
-import { User } from './entity/user.entity'
+import { AuthOutput, LoginInput, User } from './entity/user.entity'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
-import { CreateUserInput } from './dtos/create-user.input'
+import {
+  RegisterWithProviderInput,
+  RegisterWithCredentialsInput,
+} from './dtos/create-user.input'
 import { UpdateUserInput } from './dtos/update-user.input'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { GetUserType } from '@foundation/util/types'
@@ -11,9 +14,39 @@ import { GetUserType } from '@foundation/util/types'
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation(() => User)
-  createUser(@Args('createUserInput') args: CreateUserInput) {
-    return this.usersService.create(args)
+  @Mutation(() => AuthOutput)
+  registerWithProvider(
+    @Args('registerWithProviderInput') args: RegisterWithProviderInput,
+  ) {
+    try {
+      return this.usersService.registerWithProvider(args)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  @Mutation(() => AuthOutput)
+  async registerWithCredentials(
+    @Args('registerWithCredentialsInput')
+    args: RegisterWithCredentialsInput,
+  ) {
+    try {
+      return this.usersService.registerWithCredentials(args)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  @Mutation(() => AuthOutput)
+  async login(
+    @Args('loginInput')
+    args: LoginInput,
+  ) {
+    try {
+      return this.usersService.login(args)
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   @AllowAuthenticated('admin')
