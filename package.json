@@ -4,12 +4,19 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm exec nx run-many --target=build"
+    "build": "pnpm exec nx run-many --target=build",
+    "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
+    "format:check": "pnpm format --check",
+    "format:write": "pnpm format --write",
+    "lint": "pnpm exec nx run-many --target=lint",
+    "tsc": "pnpm exec nx run-many --target=tsc",
+    "validate": "pnpm format:write && pnpm tsc && pnpm lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nx": "17.2.7"
+    "nx": "17.2.7",
+    "prettier": "^2.3.2"
   }
 }

@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "tsc": "tsc",
     "dev": "tsc",
     "build": "tsc"
   },
