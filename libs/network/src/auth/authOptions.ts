@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
       if (!token) {
         throw new Error('Token is undefined')
       }
-      const { sub, ...tokenProps } = token
+      const { sub, picture, ...tokenProps } = token
 
       const nowInSeconds = Math.floor(Date.now() / 1000)
       const expirationTimestamp = nowInSeconds + MAX_AGE
@@ -77,6 +77,7 @@ export const authOptions: NextAuthOptions = {
       return sign(
         {
           uid: sub,
+          image: picture,
           ...tokenProps,
           exp: expirationTimestamp,
         },

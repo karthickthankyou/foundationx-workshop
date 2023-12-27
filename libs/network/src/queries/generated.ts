@@ -361,6 +361,26 @@ export type RegisterWithProviderMutation = {
   }
 }
 
+export type RegisterWithCredentialsMutationVariables = Exact<{
+  registerWithCredentialsInput: RegisterWithCredentialsInput
+}>
+
+export type RegisterWithCredentialsMutation = {
+  __typename?: 'Mutation'
+  registerWithCredentials: {
+    __typename?: 'AuthOutput'
+    token: string
+    user: {
+      __typename?: 'User'
+      uid: string
+      name?: string | null
+      image?: string | null
+      createdAt: any
+      updatedAt: any
+    }
+  }
+}
+
 export const namedOperations = {
   Query: {
     user: 'user',
@@ -368,6 +388,7 @@ export const namedOperations = {
   Mutation: {
     Login: 'Login',
     registerWithProvider: 'registerWithProvider',
+    registerWithCredentials: 'registerWithCredentials',
   },
 }
 
@@ -570,4 +591,78 @@ export const RegisterWithProviderDocument = {
 } as unknown as DocumentNode<
   RegisterWithProviderMutation,
   RegisterWithProviderMutationVariables
+>
+export const RegisterWithCredentialsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'registerWithCredentials' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'registerWithCredentialsInput' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'RegisterWithCredentialsInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'registerWithCredentials' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'registerWithCredentialsInput' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'registerWithCredentialsInput' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'uid' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updatedAt' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'token' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  RegisterWithCredentialsMutation,
+  RegisterWithCredentialsMutationVariables
 >

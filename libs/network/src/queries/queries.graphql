@@ -35,3 +35,20 @@ mutation registerWithProvider(
     token
   }
 }
+
+mutation registerWithCredentials(
+  $registerWithCredentialsInput: RegisterWithCredentialsInput!
+) {
+  registerWithCredentials(
+    registerWithCredentialsInput: $registerWithCredentialsInput
+  ) {
+    user {
+      uid
+      name
+      image
+      createdAt
+      updatedAt
+    }
+    token
+  }
+}

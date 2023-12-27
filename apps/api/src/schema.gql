@@ -32,31 +32,10 @@ type Item {
 }
 
 type Query {
-  users(
-    distinct: [UserScalarFieldEnum!]
-    where: UserWhereInput
-    orderBy: [UserOrderByWithRelationInput!]
-    cursor: UserWhereUniqueInput
-    take: Int
-    skip: Int
-  ): [User!]!
+  users(distinct: [UserScalarFieldEnum!], where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): [User!]!
   user(where: UserWhereUniqueInput!): User!
-  items(
-    distinct: [ItemScalarFieldEnum!]
-    where: ItemWhereInput
-    orderBy: [ItemOrderByWithRelationInput!]
-    cursor: ItemWhereUniqueInput
-    take: Int
-    skip: Int
-  ): [Item!]!
-  myItems(
-    distinct: [ItemScalarFieldEnum!]
-    where: ItemWhereInput
-    orderBy: [ItemOrderByWithRelationInput!]
-    cursor: ItemWhereUniqueInput
-    take: Int
-    skip: Int
-  ): [Item!]!
+  items(distinct: [ItemScalarFieldEnum!], where: ItemWhereInput, orderBy: [ItemOrderByWithRelationInput!], cursor: ItemWhereUniqueInput, take: Int, skip: Int): [Item!]!
+  myItems(distinct: [ItemScalarFieldEnum!], where: ItemWhereInput, orderBy: [ItemOrderByWithRelationInput!], cursor: ItemWhereUniqueInput, take: Int, skip: Int): [Item!]!
   item(where: ItemWhereUniqueInput!): Item!
 }
 
@@ -184,12 +163,8 @@ input ItemWhereUniqueInput {
 }
 
 type Mutation {
-  registerWithProvider(
-    registerWithProviderInput: RegisterWithProviderInput!
-  ): AuthOutput!
-  registerWithCredentials(
-    registerWithCredentialsInput: RegisterWithCredentialsInput!
-  ): AuthOutput!
+  registerWithProvider(registerWithProviderInput: RegisterWithProviderInput!): AuthOutput!
+  registerWithCredentials(registerWithCredentialsInput: RegisterWithCredentialsInput!): AuthOutput!
   login(loginInput: LoginInput!): AuthOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User!
