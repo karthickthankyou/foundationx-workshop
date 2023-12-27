@@ -1,0 +1,32 @@
+{
+  "name": "@foundation/network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@foundation/util": "workspace:^",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "graphql": "^16.8.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/named-operations-object": "^3.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@parcel/watcher": "^2.3.0",
+    "@types/jsonwebtoken": "^9.0.5",
+    "next-auth": "^4.24.5",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@parcel/watcher": "^2.3.0",
+    "next-auth": "^4.24.5"
+  }
+}

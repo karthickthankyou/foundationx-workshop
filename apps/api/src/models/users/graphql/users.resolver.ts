@@ -87,4 +87,12 @@ export class UsersResolver {
   items(@Parent() parent: User) {
     return this.prisma.item.findMany({ where: { uid: parent.uid } })
   }
+
+  @ResolveField(() => String)
+  async email(@Parent() parent: User) {
+    const cred = await this.prisma.credentials.findUnique({
+      where: { uid: parent.uid },
+    })
+    return cred.email
+  }
 }

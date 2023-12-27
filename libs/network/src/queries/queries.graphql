@@ -1,0 +1,37 @@
+mutation Login($loginInput: LoginInput!) {
+  login(loginInput: $loginInput) {
+    user {
+      updatedAt
+      uid
+      name
+      image
+      createdAt
+      email
+    }
+    token
+  }
+}
+
+query user($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    uid
+    name
+    email
+  }
+}
+
+mutation registerWithProvider(
+  $registerWithProviderInput: RegisterWithProviderInput!
+) {
+  registerWithProvider(registerWithProviderInput: $registerWithProviderInput) {
+    user {
+      updatedAt
+      uid
+      name
+      image
+      email
+      createdAt
+    }
+    token
+  }
+}
