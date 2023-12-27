@@ -1,0 +1,19 @@
+{
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/.next, build, dist"],
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "tsc": {
+      "cache": true
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "nxCloudAccessToken": "ZmZhZDVkN2QtOTM4YS00Y2E2LTgwZDItZmRlMzljNzRmMDVlfHJlYWQtd3JpdGU="
+}
