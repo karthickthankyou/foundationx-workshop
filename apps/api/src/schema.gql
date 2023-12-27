@@ -8,6 +8,7 @@ type User {
   uid: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  items: [Item!]!
 }
 
 """
@@ -20,9 +21,21 @@ type AuthOutput {
   token: String!
 }
 
+type Item {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  uid: String!
+  name: String!
+  user: User!
+}
+
 type Query {
   users(distinct: [UserScalarFieldEnum!], where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): [User!]!
   user(where: UserWhereUniqueInput!): User!
+  items(distinct: [ItemScalarFieldEnum!], where: ItemWhereInput, orderBy: [ItemOrderByWithRelationInput!], cursor: ItemWhereUniqueInput, take: Int, skip: Int): [Item!]!
+  myItems(distinct: [ItemScalarFieldEnum!], where: ItemWhereInput, orderBy: [ItemOrderByWithRelationInput!], cursor: ItemWhereUniqueInput, take: Int, skip: Int): [Item!]!
+  item(where: ItemWhereUniqueInput!): Item!
 }
 
 enum UserScalarFieldEnum {
@@ -34,6 +47,7 @@ enum UserScalarFieldEnum {
 }
 
 input UserWhereInput {
+  Item: ItemListRelationFilter
   uid: StringFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -41,6 +55,42 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
+}
+
+input ItemListRelationFilter {
+  every: ItemWhereInput
+  some: ItemWhereInput
+  none: ItemWhereInput
+}
+
+input ItemWhereInput {
+  id: IntFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  name: StringFilter
+  uid: StringFilter
+  user: UserRelationFilter
+  AND: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  NOT: [ItemWhereInput!]
+}
+
+input IntFilter {
+  equals: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+}
+
+input DateTimeFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
 }
 
 input StringFilter {
@@ -63,14 +113,9 @@ enum QueryMode {
   insensitive
 }
 
-input DateTimeFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
 }
 
 input UserOrderByWithRelationInput {
@@ -79,6 +124,7 @@ input UserOrderByWithRelationInput {
   updatedAt: SortOrder
   name: SortOrder
   image: SortOrder
+  Item: ItemOrderByRelationAggregateInput
 }
 
 enum SortOrder {
@@ -86,8 +132,33 @@ enum SortOrder {
   desc
 }
 
+input ItemOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
 input UserWhereUniqueInput {
   uid: String!
+}
+
+enum ItemScalarFieldEnum {
+  id
+  createdAt
+  updatedAt
+  name
+  uid
+}
+
+input ItemOrderByWithRelationInput {
+  id: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  name: SortOrder
+  uid: SortOrder
+  user: UserOrderByWithRelationInput
+}
+
+input ItemWhereUniqueInput {
+  id: Int!
 }
 
 type Mutation {
@@ -96,6 +167,9 @@ type Mutation {
   login(loginInput: LoginInput!): AuthOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User!
+  createItem(createItemInput: CreateItemInput!): Item!
+  updateItem(updateItemInput: UpdateItemInput!): Item!
+  removeItem(where: ItemWhereUniqueInput!): Item!
 }
 
 input RegisterWithProviderInput {
@@ -124,4 +198,13 @@ input LoginInput {
 
 input UpdateUserInput {
   uid: String!
+}
+
+input CreateItemInput {
+  name: String!
+}
+
+input UpdateItemInput {
+  name: String
+  id: Int!
 }

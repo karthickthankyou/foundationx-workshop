@@ -1,4 +1,11 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql'
 import { UsersService } from './users.service'
 import { AuthOutput, LoginInput, User } from './entity/user.entity'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
@@ -9,10 +16,15 @@ import {
 import { UpdateUserInput } from './dtos/update-user.input'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { GetUserType } from '@foundation/util/types'
+import { Item } from 'src/models/items/graphql/entity/item.entity'
+import { PrismaService } from 'src/common/prisma/prisma.service'
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Mutation(() => AuthOutput)
   registerWithProvider(
@@ -49,7 +61,7 @@ export class UsersResolver {
     }
   }
 
-  @AllowAuthenticated('admin')
+  //   @AllowAuthenticated('admin')
   @Query(() => [User], { name: 'users' })
   findAll(@Args() args: FindManyUserArgs, @GetUser() user: GetUserType) {
     console.log('user ', user)
@@ -69,5 +81,10 @@ export class UsersResolver {
   @Mutation(() => User)
   removeUser(@Args() args: FindUniqueUserArgs) {
     return this.usersService.remove(args)
+  }
+
+  @ResolveField(() => [Item])
+  items(@Parent() parent: User) {
+    return this.prisma.item.findMany({ where: { uid: parent.uid } })
   }
 }

@@ -22,6 +22,7 @@ model User {
     AuthProvider AuthProvider?
     Admin        Admin?
     Manager      Manager?
+    Item         Item[]
 }
 
 model Admin {
@@ -55,4 +56,15 @@ model AuthProvider {
 enum AuthProviderType {
     GOOGLE
     CREDENTIALS
+}
+
+model Item {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name String
+
+    uid  String
+    user User   @relation(fields: [uid], references: [uid])
 }

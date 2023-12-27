@@ -1,22 +1,18 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql'
 import { Prisma } from '@prisma/client'
 import { RestrictProperties } from 'src/common/dtos/common.input'
-import { ItemOrderByRelationAggregateInput } from 'src/models/items/graphql/dtos/order-by.args'
+import { UserOrderByWithRelationInput } from 'src/models/users/graphql/dtos/order-by.args'
 
 @InputType()
-export class UserOrderByWithRelationInputStrict
+export class ItemOrderByWithRelationInputStrict
   implements
     RestrictProperties<
-      UserOrderByWithRelationInputStrict,
-      Omit<
-        Prisma.UserOrderByWithRelationInput,
-        'Credentials' | 'AuthProvider' | 'Admin' | 'Manager'
-      >
+      ItemOrderByWithRelationInputStrict,
+      Prisma.ItemOrderByWithRelationInput
     >
 {
-  Item: ItemOrderByRelationAggregateInput
   @Field(() => Prisma.SortOrder)
-  uid: Prisma.SortOrder
+  id: Prisma.SortOrder
   @Field(() => Prisma.SortOrder)
   createdAt: Prisma.SortOrder
   @Field(() => Prisma.SortOrder)
@@ -24,16 +20,17 @@ export class UserOrderByWithRelationInputStrict
   @Field(() => Prisma.SortOrder)
   name: Prisma.SortOrder
   @Field(() => Prisma.SortOrder)
-  image: Prisma.SortOrder
+  uid: Prisma.SortOrder
+  user: UserOrderByWithRelationInput
 }
 
 @InputType()
-export class UserOrderByWithRelationInput extends PartialType(
-  UserOrderByWithRelationInputStrict,
+export class ItemOrderByWithRelationInput extends PartialType(
+  ItemOrderByWithRelationInputStrict,
 ) {}
 
 @InputType()
-export class UserOrderByRelationAggregateInput {
+export class ItemOrderByRelationAggregateInput {
   @Field(() => Prisma.SortOrder)
   _count?: Prisma.SortOrder
 }
