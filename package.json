@@ -10,12 +10,15 @@
     "format:write": "pnpm format --write",
     "lint": "pnpm exec nx run-many --target=lint",
     "tsc": "pnpm exec nx run-many --target=tsc",
-    "validate": "pnpm format:write && pnpm tsc && pnpm lint"
+    "validate": "pnpm format:write && pnpm tsc && pnpm lint",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "nx": "17.2.7",
     "prettier": "^2.3.2"
   }
