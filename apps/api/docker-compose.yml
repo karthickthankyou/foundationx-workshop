@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: foundation_db
+    image: postgres
+    restart: always
+    ports:
+      - 1021:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data_foundationx:/var/lib/postgresql/data
+  pgadmin:
+    container_name: foundation_pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - '1121:80'
+    depends_on:
+      - db
+volumes:
+  db_data_foundationx:
