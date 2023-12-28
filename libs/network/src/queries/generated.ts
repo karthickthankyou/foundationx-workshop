@@ -67,6 +67,7 @@ export type Item = {
   __typename?: 'Item'
   createdAt: Scalars['DateTime']['output']
   id: Scalars['Int']['output']
+  image?: Maybe<Scalars['String']['output']>
   name: Scalars['String']['output']
   uid: Scalars['String']['output']
   updatedAt: Scalars['DateTime']['output']
@@ -95,6 +96,7 @@ export type ItemOrderByWithRelationInput = {
 export enum ItemScalarFieldEnum {
   CreatedAt = 'createdAt',
   Id = 'id',
+  Image = 'image',
   Name = 'name',
   Uid = 'uid',
   UpdatedAt = 'updatedAt',
@@ -106,6 +108,7 @@ export type ItemWhereInput = {
   OR?: InputMaybe<Array<ItemWhereInput>>
   createdAt?: InputMaybe<DateTimeFilter>
   id?: InputMaybe<IntFilter>
+  image?: InputMaybe<Scalars['String']['input']>
   name?: InputMaybe<StringFilter>
   uid?: InputMaybe<StringFilter>
   updatedAt?: InputMaybe<DateTimeFilter>
@@ -381,14 +384,51 @@ export type RegisterWithCredentialsMutation = {
   }
 }
 
+export type MyItemsQueryVariables = Exact<{
+  skip?: InputMaybe<Scalars['Int']['input']>
+  take?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<
+    Array<ItemOrderByWithRelationInput> | ItemOrderByWithRelationInput
+  >
+  where?: InputMaybe<ItemWhereInput>
+}>
+
+export type MyItemsQuery = {
+  __typename?: 'Query'
+  myItems: Array<{
+    __typename?: 'Item'
+    createdAt: any
+    id: number
+    name: string
+    user: { __typename?: 'User'; name?: string | null }
+  }>
+}
+
+export type CreateItemMutationVariables = Exact<{
+  createItemInput: CreateItemInput
+}>
+
+export type CreateItemMutation = {
+  __typename?: 'Mutation'
+  createItem: {
+    __typename?: 'Item'
+    name: string
+    id: number
+    createdAt: any
+    uid: string
+  }
+}
+
 export const namedOperations = {
   Query: {
     user: 'user',
+    myItems: 'myItems',
   },
   Mutation: {
     Login: 'Login',
     registerWithProvider: 'registerWithProvider',
     registerWithCredentials: 'registerWithCredentials',
+    createItem: 'createItem',
   },
 }
 
@@ -666,3 +706,168 @@ export const RegisterWithCredentialsDocument = {
   RegisterWithCredentialsMutation,
   RegisterWithCredentialsMutationVariables
 >
+export const MyItemsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'myItems' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'skip' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'take' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'ItemOrderByWithRelationInput' },
+              },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'where' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'ItemWhereInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'myItems' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'skip' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'skip' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'take' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'take' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'orderBy' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<MyItemsQuery, MyItemsQueryVariables>
+export const CreateItemDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createItem' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'createItemInput' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreateItemInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createItem' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'createItemInput' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'createItemInput' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'uid' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateItemMutation, CreateItemMutationVariables>

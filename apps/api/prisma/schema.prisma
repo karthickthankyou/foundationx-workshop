@@ -63,7 +63,8 @@ model Item {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name String
+    name  String
+    image String?
 
     uid  String
     user User   @relation(fields: [uid], references: [uid])

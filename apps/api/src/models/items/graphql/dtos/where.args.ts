@@ -17,6 +17,7 @@ export class ItemWhereUniqueInput {
 export class ItemWhereInputStrict
   implements RestrictProperties<ItemWhereInputStrict, Prisma.ItemWhereInput>
 {
+  image: string
   id: IntFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter

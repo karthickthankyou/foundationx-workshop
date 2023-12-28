@@ -248,6 +248,9 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.5
         version: 9.0.5
+      next:
+        specifier: 14.0.4
+        version: 14.0.4(@babel/core@7.23.6)(react-dom@18.2.0)(react@18.2.0)
       next-auth:
         specifier: ^4.24.5
         version: 4.24.5(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -287,6 +290,9 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
+      date-fns:
+        specifier: ^3.0.6
+        version: 3.0.6
       lucide-react:
         specifier: ^0.302.0
         version: 0.302.0(react@18.2.0)
@@ -5598,6 +5604,10 @@ packages:
   /dataloader@2.2.2:
     resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
     dev: true
+
+  /date-fns@3.0.6:
+    resolution: {integrity: sha512-W+G99rycpKMMF2/YD064b2lE7jJGUe+EjOES7Q8BIGY8sbNdbgcs9XFTZwvzc9Jx1f3k7LB7gZaZa7f8Agzljg==}
+    dev: false
 
   /debounce@1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}

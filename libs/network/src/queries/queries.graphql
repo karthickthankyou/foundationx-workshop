@@ -52,3 +52,28 @@ mutation registerWithCredentials(
     token
   }
 }
+
+query myItems(
+  $skip: Int
+  $take: Int
+  $orderBy: [ItemOrderByWithRelationInput!]
+  $where: ItemWhereInput
+) {
+  myItems(skip: $skip, take: $take, orderBy: $orderBy, where: $where) {
+    createdAt
+    id
+    name
+    user {
+      name
+    }
+  }
+}
+
+mutation createItem($createItemInput: CreateItemInput!) {
+  createItem(createItemInput: $createItemInput) {
+    name
+    id
+    createdAt
+    uid
+  }
+}

@@ -23,6 +23,7 @@ type AuthOutput {
 }
 
 type Item {
+  image: String
   id: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -65,6 +66,7 @@ input ItemListRelationFilter {
 }
 
 input ItemWhereInput {
+  image: String
   id: IntFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -146,6 +148,7 @@ enum ItemScalarFieldEnum {
   createdAt
   updatedAt
   name
+  image
   uid
 }
 

@@ -11,3 +11,8 @@ export type BaseComponent = {
   children?: ReactNode
   className?: string
 }
+
+export type FormState = {
+  data?: any | null
+  error?: string | null
+}

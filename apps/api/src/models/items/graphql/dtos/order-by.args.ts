@@ -8,7 +8,7 @@ export class ItemOrderByWithRelationInputStrict
   implements
     RestrictProperties<
       ItemOrderByWithRelationInputStrict,
-      Prisma.ItemOrderByWithRelationInput
+      Omit<Prisma.ItemOrderByWithRelationInput, 'image'>
     >
 {
   @Field(() => Prisma.SortOrder)
