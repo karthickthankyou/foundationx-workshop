@@ -13,6 +13,7 @@
     "@foundation/forms": "workspace:^",
     "@foundation/network": "workspace:^",
     "@foundation/sample-lib": "workspace:^",
+    "@foundation/ui": "workspace:^",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",

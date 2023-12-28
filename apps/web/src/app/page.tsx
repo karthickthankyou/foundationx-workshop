@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main>
       Hello world {add(3, 4)}
-      <div></div>
+      <div className="w-40 h-40"></div>
       {user?.user ? <Signout /> : <Link href={'/signIn'}>Signin</Link>}
     </main>
   )
