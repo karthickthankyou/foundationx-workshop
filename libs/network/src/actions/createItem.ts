@@ -17,7 +17,7 @@ export async function createItem(formData: FormData) {
 
   if (result.success) {
     console.log('result', result.data)
-    const { data, error } = await fetchGraphQLServer({
+    const { data } = await fetchGraphQLServer({
       document: CreateItemDocument,
       variables: { createItemInput: { name: result.data.name } },
     })

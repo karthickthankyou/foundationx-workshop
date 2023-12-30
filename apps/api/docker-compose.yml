@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - 1021:5432
+      - ${PG_PORT}:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
@@ -21,7 +21,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
-      - '1121:80'
+      - ${PGADMIN_PORT}:80
     depends_on:
       - db
 volumes:

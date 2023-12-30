@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import { FetchResult, GraphqlRequestOptions, fetchGraphqlStatic } from '.'
 
 export async function fetchGraphQLClient<TData, V>({
