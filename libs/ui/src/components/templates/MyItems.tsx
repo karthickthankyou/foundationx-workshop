@@ -23,9 +23,6 @@ export const MyItems = async () => {
     return <div>Error fetching items.</div>
   }
 
-  if (!data || data.myItems.length === 0) {
-    return <div>No items.</div>
-  }
   return (
     <div>
       <div className="grid grid-cols-2 gap-2 my-4">
@@ -38,8 +35,9 @@ export const MyItems = async () => {
           <FormCreateItemServer />
         </div>
       </div>
+      {data?.myItems.length === 0 ? <div>No items.</div> : null}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        {data.myItems.map((item) => (
+        {data?.myItems.map((item) => (
           <div className="p-3 rounded shadow-lg " key={item.id}>
             <div className="font-semibold ">{item.name}</div>
             <div className="text-xs">{item.user.name}</div>
